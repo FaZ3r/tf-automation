@@ -4,6 +4,6 @@ resource "aws_launch_template" "demo_lt" {
   key_name      = "ec2_key1" 
 
   network_interfaces {
-    security_groups = [var.security_group_id] 
+    security_groups = [var.new_sec_group.id] 
   }
 }
