@@ -44,6 +44,6 @@ def parse_timestamp(ts_str):
 
 logs.sort(key= lambda x: parse_timestamp(x[0]))
 
-with open(open('/home/ec2-user/logs.txt', 'a')) as f:
+with open('/home/ec2-user/logs.txt', 'a') as f:
     for _, entry in logs :
         f.write(entry+"\n")
