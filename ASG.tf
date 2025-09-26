@@ -5,7 +5,7 @@ resource "aws_autoscaling_group" "demo_asg" {
   vpc_zone_identifier = [aws_subnet.MySubnet1.id, aws_subnet.MySubnet2.id]
 
   launch_template {
-    id      = aws_launch_template.demo_lt.id
+    id     = aws_launch_template.demo_lt.id
     version = "$Latest"
   }
 
