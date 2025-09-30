@@ -95,4 +95,5 @@ jobs:
         aws-region: eu-west-2
 
     - name: Terraform Apply
-      run: echo ${{github.event_name}}
+      if: github.ref == 'refs/heads/"main"' && github.event_name == 'workflow_dispatch'
+      run: echo ${{github.ref}}
