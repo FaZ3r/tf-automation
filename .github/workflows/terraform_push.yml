@@ -9,8 +9,64 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: 'Terraform'
+
+  terraform-plan:
+    name: 'Terraform-plan'
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run: 
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: latest
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: eu-west-2
+      
+      - name: Terraform plan
+        run: terraform plan
+
+    
+  manual-approval:
+    name: manual approval
+    runs-on: ubuntu-latest
+    needs: terraform-plan
+    if: success()
+
+    permissions:
+      issues: write
+      contents: read
+
+    steps: 
+      - name: Await for manual approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{github.TOKEN}}
+          approvers: FaZ3r
+          minimum-approvals: 1
+          issue-title: "Deploy infrastructure to AWS"
+          issue-body: "Please approve or deny the deployment of the latest version"
+          fail-on-denial: true
+          exclude-workflow-initiator-as-approver: false
+
+
+  terraform-apply:
+    name: 'terraform-apply'
     runs-on: ubuntu-latest
     environment: production
 
