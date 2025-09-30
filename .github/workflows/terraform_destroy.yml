@@ -66,6 +66,7 @@ jobs:
     name: 'Terraform-destroy'
     runs-on: ubuntu-latest
     environment: production
+    needs: manual-approval
 
     defaults:
       run:
