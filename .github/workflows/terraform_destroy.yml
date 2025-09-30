@@ -56,14 +56,14 @@ jobs:
             secret: ${{github.TOKEN}}
             approvers: FaZ3r
             minimum-approvals: 1
-            issue-title: "Deploy infrastructure to AWS"
-            issue-body: "Please approve or deny the deployment of the latest version"
+            issue-title: "Delete infrastructure from AWS"
+            issue-body: "Please approve or deny the deletion of existing infrastructure"
             fail-on-denial: true
             exclude-workflow-initiator-as-approver: false
 
 
-  terraform-apply:
-    name: 'Terraform-apply'
+  terraform-destroy:
+    name: 'Terraform-destroy'
     runs-on: ubuntu-latest
     environment: production
 
