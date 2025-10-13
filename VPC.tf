@@ -6,11 +6,11 @@ resource "aws_vpc" "demo_vpc1" {
 }
 
 resource "aws_internet_gateway" "gatewayT"{
-    vpc_id = aws_vpc.demo_vpc.id
+    vpc_id = aws_vpc.demo_vpc1.id
 }
 
 resource "aws_subnet" "SubnetA"{
-    vpc_id = aws_vpc.demo_vpc.id
+    vpc_id = aws_vpc.demo_vpc1.id
     cidr_block = "10.0.3.0/24"
     availability_zone = "eu-west-2a"
     map_public_ip_on_launch = true
@@ -18,14 +18,14 @@ resource "aws_subnet" "SubnetA"{
 }
 
 resource "aws_subnet" "SubnetB"{
-    vpc_id = aws_vpc.demo_vpc.id
+    vpc_id = aws_vpc.demo_vpc1.id
     cidr_block = "10.0.5.0/24"
     availability_zone = "eu-west-2b"
     map_public_ip_on_launch = true
 }
 
 resource "aws_security_group" "sec_group_tudor" {
-  vpc_id = aws_vpc.demo_vpc.id
+  vpc_id = aws_vpc.demo_vpc1.id
   name   = "demo-sg"
 
   ingress {
