@@ -8,8 +8,8 @@ resource "aws_lb_target_group" "demo_tg" {
 resource "aws_lb" "demo_alb" {
   name               = "demo-alb"
   load_balancer_type = "application"
-  subnets            = [aws_subnet.MySubnet1.id, aws_subnet.MySubnet2.id]
-  security_groups    = [aws_security_group.new_sec_group.id]
+  subnets            = [aws_subnet.SubnetA.id, aws_subnet.SubnetB.id]
+  security_groups    = [aws_security_group.sec_group_tudor.id]
 }
 
 resource "aws_lb_listener" "demo_listener" {
