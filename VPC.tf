@@ -6,13 +6,34 @@ resource "aws_vpc" "demo_vpc1" {
 }
 
 resource "aws_internet_gateway" "gatewayT"{
-    vpc_id = aws_vpc.demo_vpc1.id
+    vpc_id = aws_vpc.demo_vpc1.id   
 }
+
+resource "aws_route_table" "public_table"{
+  vpc_id = aws_vpc.demo_vpc1.id
+}
+
+resource "aws_route" "tudor_route"{
+  route_table_id = aws_route_table.public_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.gatewayT.id
+}
+
+resource "aws_route_table_association" "public_assoc_SubnetA"{
+  subnet_id = aws_subnet.SubnetA.id
+  route_table_id = aws_route_table.public_table.id
+}
+
+resource "aws_route_table_assciation" "public_assoc_SubnetB"{
+  subnet_id = aws_subnet.SubnetB.id
+  route_table_id= aws_route_table.public_table.id
+} 
 
 resource "aws_subnet" "SubnetA"{
     vpc_id = aws_vpc.demo_vpc1.id
     cidr_block = "10.0.3.0/24"
     availability_zone = "eu-west-2a"
+    
     map_public_ip_on_launch = true
 
 }
