@@ -26,7 +26,7 @@ resource "aws_launch_template" "demo_lt" {
       type="SSH"
       user="ec2-user"
       private_key="~/my_key.pem"
-      host="${self.public_ip}"
+      host=self.public_ip
     }
   }
   
