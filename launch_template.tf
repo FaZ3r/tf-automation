@@ -13,7 +13,7 @@ resource "aws_iam_policy" "S3GetPolicy"{
   name= "S3GetPolicyTudor"
   description = "Custom policy for read only access to my bucket"
 
-  policy = jsondecode({
+  policy = jsonencode({
     "Version": "2012-10-17",
     "Statement": [
         {
