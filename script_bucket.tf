@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "script_bucket"{
-    bucket= "tudor_script_bucket"
+    bucket= "tudor-script-bucket1"
 }
 
 resource "aws_s3_object" "log_script"{
