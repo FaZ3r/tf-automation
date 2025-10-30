@@ -18,9 +18,16 @@ resource "aws_launch_template" "demo_lt" {
   instance_type = "t3.micro"
   key_name      = "ec2_key1"
 
-  provisioner "file"{
+ provisioner "file"{
     source="${path.cwd}/log_generator2.py"
     destination = "/home/ec2-user/log_generator2.py"
+
+    connection {
+      type="SSH"
+      user="ec2-user"
+      private_key="~/my_key.pem"
+      host="${self.public_dns}"
+    }
   }
   
   iam_instance_profile{
