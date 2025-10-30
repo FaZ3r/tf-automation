@@ -67,8 +67,8 @@ jobs:
         aws-region: eu-west-2
         
     - name: Copy SSH key for Packer
-      run: | 
-        echo ${{env.MY_EC2_KEY}} > ~/my_key.pem
+      run: |
+        echo "${{env.MY_EC2_KEY}}" > ~/my_key.pem
         chmod 600 ~/my_key.pem
 
     - name: Terraform Apply
