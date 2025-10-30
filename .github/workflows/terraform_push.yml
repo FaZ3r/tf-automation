@@ -67,7 +67,7 @@ jobs:
         
     - name: Copy SSH key for Packer
       run: | 
-        echo ${{secrets.MY_EC2_KEY}} >> ~/my_key.pem
+        echo ${{secrets.MY_EC2_KEY}} > ~/my_key.pem
         chmod 600 ~/my_key.pem
 
     - name: Terraform Apply
