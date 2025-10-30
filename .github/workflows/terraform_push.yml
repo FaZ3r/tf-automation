@@ -12,6 +12,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   PAT: ${{secrets.PAT}}
+  MY_EC2_KEY: ${{secrets.MY_EC2_KEY}}
 
 jobs:    
   manual-approval:
@@ -67,7 +68,7 @@ jobs:
         
     - name: Copy SSH key for Packer
       run: | 
-        echo ${{secrets.MY_EC2_KEY}} > ~/my_key.pem
+        echo ${{env.MY_EC2_KEY}} > ~/my_key.pem
         chmod 600 ~/my_key.pem
 
     - name: Terraform Apply
