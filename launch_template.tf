@@ -8,7 +8,34 @@ resource "aws_iam_role_policy_attachment" "CWARoleAttachTudor"{
   role= aws_iam_role.CWAgentTudorRole.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
+resource "aws_iam_policy" "LogPolicy"{
+  name = "LogPolicyTudor"
+  description = "Custom policy for creating log streams and logs from ec2"
 
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters"
+            ],
+            "Resource": "arn:aws:ssm:${var.current_region}:${me.account_id}:parameter/CloudWatchAgentTudor/Config"
+        },
+        {
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
+
+}
 resource "aws_iam_policy" "S3GetPolicy"{
   name= "S3GetPolicyTudor"
   description = "Custom policy for read only access to my bucket"
@@ -29,6 +56,11 @@ resource "aws_iam_policy" "S3GetPolicy"{
 })
 
 }
+resource "aws_iam_role_policy_attachment" "S3GetAttachTudor"{
+  role= aws_iam_role.CWAgentTudorRole.name
+  policy_arn = aws_iam_policy.LogPolicy.arn
+}
+
 resource "aws_iam_role_policy_attachment" "S3GetAttachTudor"{
   role= aws_iam_role.CWAgentTudorRole.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
