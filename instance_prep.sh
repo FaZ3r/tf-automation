@@ -11,3 +11,5 @@ pip3 install randomtimestamp
   -m ec2 \
   -c ssm:/CloudWatchAgentTudor/Config \
   -s
+
+  aws s3 cp s3://tudor-script-bucket1/log_generator2.py .
