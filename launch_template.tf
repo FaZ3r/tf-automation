@@ -44,7 +44,7 @@ resource "aws_launch_template" "demo_lt" {
   instance_type = "t3.micro"
   key_name      = "ec2_key1"
 
-  user_data = "${path.cwd}/instance_prep.sh"
+  user_data = file("${path.cwd}/instance_prep.sh")
 
   iam_instance_profile{
     name= "tf_tudor_profile"
