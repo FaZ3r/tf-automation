@@ -30,12 +30,16 @@ resource "aws_ssm_parameter" "cloudwatch_config_tudor" {
   })
 }
 
+
+data "aws_caller_identity" "me"{}
+
 data "aws_iam_policy_document" "cw_ssm_policy_doc" {
   statement {
     actions   = ["ssm:GetParameter"]
-    resources = ["arn:aws:ssm:${var.current_region}:${data.aws_caller_identity.current.account_id}:parameter/CloudWatchAgentTudor/Config"]
+    resources = ["arn:aws:ssm:${var.current_region}:${data.aws_caller_identity.me.account_id}:parameter/CloudWatchAgentTudor/Config"]
   }
 }
+
 
 resource "aws_iam_policy" "cw_ssm_policy" {
   name   = "CloudWatchAgentReadConfigTudor"
