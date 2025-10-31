@@ -21,7 +21,7 @@ resource "aws_iam_policy" "LogPolicy"{
                 "ssm:GetParameter",
                 "ssm:GetParameters"
             ],
-            "Resource": "arn:aws:ssm:${var.current_region}:${aws_caller_identity.me.account_id}:parameter/CloudWatchAgentTudor/Config"
+            "Resource": "arn:aws:ssm:${var.current_region}:${data.aws_caller_identity.me.account_id}:parameter/CloudWatchAgentTudor/Config"
         },
         {
         "Effect" : "Allow",
