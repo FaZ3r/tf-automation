@@ -44,7 +44,21 @@ resource "aws_launch_template" "demo_lt" {
   instance_type = "t3.micro"
   key_name      = "ec2_key1"
 
-  user_data = file("${path.cwd}/instance_prep.sh")
+  user_data = <<-EOF
+#!/bin/bash
+sudo dnf update
+sudo dnf install -y amazon-cloudwatch-agent python3
+
+python3 -m ensurepip
+pip3 install --upgrade pip
+pip3 install randomtimestamp
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+-a fetch-config \
+-m ec2 \
+-c ssm:/CloudWatchAgentTudor/Config \
+-s
+EOF
 
   iam_instance_profile{
     name= "tf_tudor_profile"
