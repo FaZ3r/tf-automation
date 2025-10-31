@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "script_bucket"{
     bucket= "tudor-script-bucket1"
+    force_destroy = true
 }
 
 resource "aws_s3_object" "log_script"{
