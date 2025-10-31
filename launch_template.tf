@@ -56,7 +56,7 @@ resource "aws_iam_policy" "S3GetPolicy"{
 })
 
 }
-resource "aws_iam_role_policy_attachment" "S3GetAttachTudor"{
+resource "aws_iam_role_policy_attachment" "LogPolicyAttach"{
   role= aws_iam_role.CWAgentTudorRole.name
   policy_arn = aws_iam_policy.LogPolicy.arn
 }
