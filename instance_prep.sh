@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo dnf update
+sudo dnf update -y
 sudo dnf install -y amazon-cloudwatch-agent python3
 
 python3 -m ensurepip
