@@ -28,7 +28,8 @@ resource "aws_iam_policy" "LogPolicy"{
         "Action" : [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
-          "logs:PutLogEvents"
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
         ],
         "Resource" : "*"
       }
@@ -85,7 +86,6 @@ resource "aws_launch_template" "demo_lt" {
     security_groups = [aws_security_group.sec_group_tudor.id] 
   }
 }
-
 
 resource "aws_cloudwatch_log_group" "log_monitor_tudor"{
   name = "log-monitor-tudor"
