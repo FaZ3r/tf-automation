@@ -50,3 +50,9 @@ resource "aws_iam_role_policy_attachment" "cw_ssm_attach" {
   role       = aws_iam_role.CWAgentTudorRole.name
   policy_arn = aws_iam_policy.cw_ssm_policy.arn
 }
+
+resource "aws_cloudwatch_log_group" "log_monitor_tudor"{
+  name = "log-monitor-tudor"
+  retention_in_days = 14
+}
+
