@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def random_log_date():
-    return randomtimestamp.random_date(start=datetime(2020,12,1), end=datetime.now())
+    return randomtimestamp.random_date(start=datetime(2025,1,1), end=datetime.now())
 
 def random_log_time():
     return randomtimestamp.random_time()
