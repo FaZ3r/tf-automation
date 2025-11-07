@@ -25,6 +25,6 @@ resource "aws_cloudwatch_metric_alarm" "ec2-log-alarm"{
     comparison_operator = "GreaterThanThreshold"
     evaluation_periods = 2
 
-    metric_name= error_filter.name
+    metric_name= aws_cloudwatch_log_metric_filter.error_filter.name
     alaram_description ="this alarm monitors the occurences of errors in my log stream"
 }
