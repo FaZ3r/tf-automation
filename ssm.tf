@@ -53,6 +53,6 @@ resource "aws_iam_role_policy_attachment" "cw_ssm_attach" {
 
 resource "aws_cloudwatch_log_group" "log_monitor_tudor"{
   name = "log-monitor-tudor"
-  retention_in_days = 14
+  retention_in_days = 1
 }
 
