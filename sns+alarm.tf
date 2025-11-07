@@ -33,5 +33,5 @@ resource "aws_cloudwatch_metric_alarm" "ec2-log-alarm"{
     namespace = "tudor_namespace"
 
     alarm_description ="Alarm when 'ERROR' occurs in logs"
-    alarm_actions = aws_sns_topic.tudor_alarm.arn
+    alarm_actions = [aws_sns_topic.tudor_alarm.arn]
 }
