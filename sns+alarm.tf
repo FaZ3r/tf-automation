@@ -20,7 +20,7 @@ resource "aws_cloudwatch_log_metric_filter" "error_filter"{
     }
 }
 
-resource "aws_cloudwatch_metric alarm" "ec2-log-alarm"{
+resource "aws_cloudwatch_metric_alarm" "ec2-log-alarm"{
     alarm_name = "ec2-log-tudor-alarm"
     comparison_operator = "GreaterThanThreshold"
     evaluation_periods = 2
